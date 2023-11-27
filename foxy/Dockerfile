@@ -63,6 +63,12 @@ RUN sed -i 's/enabled=1/enabled=0/g' /etc/default/apport
 # Enable apt-get completion
 RUN rm /etc/apt/apt.conf.d/docker-clean
 
+#myoption-japanese
+RUN apt-get update \
+    && apt-get install -y locales \
+    && locale-gen ja_JP.UTF-8 \
+    && echo "export LANG=ja_JP.UTF-8" >> ~/.bashrc
+    
 # Install Firefox
 RUN DEBIAN_FRONTEND=noninteractive add-apt-repository ppa:mozillateam/ppa -y && \
     echo 'Package: *' > /etc/apt/preferences.d/mozilla-firefox && \
